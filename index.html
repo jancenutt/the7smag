@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANA.LUCI — The Archive Scroll</title>
+    <style>
+        :root {
+            --paper: #f5f5f0;
+            --ink: #1a1a1a;
+            --seal: #c41e1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .kicker {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: normal;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta {
+            font-size: 0.875rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        .chapter {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .chapter-number {
+            font-size: 0.875rem;
+            opacity: 0.5;
+        }
+
+        .chapter-title {
+            font-size: 2rem;
+            font-weight: normal;
+        }
+
+        .big-number {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        .waveform-container {
+            margin: 3rem 0;
+            overflow: hidden;
+        }
+
+        .waveform-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .col {
+            padding: 1.5rem;
+            border-left: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .col h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .col p {
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .info-box {
+            padding: 2rem;
+            background: rgba(0,0,0,0.03);
+            border-radius: 4px;
+        }
+
+        .info-box h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-box p {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .milestones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .milestone {
+            padding: 2rem;
+            border-top: 2px solid var(--ink);
+        }
+
+        .milestone-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-phase {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        .milestone-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .milestone-text {
+            font-size: 0.875rem;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .image-container {
+            margin: 3rem 0;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .seal {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--seal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .three-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="kicker">INVESTOR EDITION · VOLUME I</div>
+    <h1>ANA.LUCI — The Archive Scroll</h1>
+    <p class="subtitle">Forty-one releases. Two hundred seventy-two tracks. One archive, reconstructed from the source record — stored privately, indexed exactly as found, and streamed on demand. Nothing loads until you press play.</p>
+    <div class="cta">Scroll down into the archive</div>
+</section>
+
+<!-- Chapter 1 -->
+<section class="chapter">
+    <div class="chapter-header">
+        <span class="chapter-number">I</span>
+        <h2 class="chapter-title">41 Releases</h2>
+    </div>
+
+    <div class="big-number">41</div>
+
+    <h3 class="section-title">A catalog rebuilt stroke by stroke, kept exactly as found</h3>
+    <p class="section-text">Every release was reconstructed from the source record — titles, aliases and statuses preserved without polish or reinvention.</p>
+
+    <div class="waveform-container">
+        <img src="waveform-landscape.jpg" alt="Waveform landscape visualization">
+    </div>
+
+    <div class="three-col">
+        <div class="col">
+            <h3>First Masters</h3>
+            <p>Where the record begins — the earliest releases that seeded the archive, kept as found.</p>
+        </div>
+        <div class="col">
+            <h3>The Reconstruction</h3>
+            <p>The long middle slope: forty-one releases rebuilt, indexed and numbered into one spine.</p>
+        </div>
+        <div class="col">
+            <h3>The Living Vault</h3>
+            <p>Where the catalog stands today — private masters, metered streams, ready for the next release.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Chapter 4 -->
+<section class="chapter">
+    <div class="chapter-header">
+        <span class="chapter-number">Chapter 4</span>
+        <h2 class="chapter-title">The Vault in Hand</h2>
+    </div>
+
+    <h3 class="section-title">One Master, Held the Archive Way</h3>
+
+    <div class="two-col">
+        <div class="info-box">
+            <h3>Held</h3>
+            <p>Masters never leave private storage. What the site shows is the index — titles, aliases, statuses — never the files.</p>
+        </div>
+        <div class="info-box">
+            <h3>Issued</h3>
+            <p>Press play and a stream link is minted for that one track. Files arrive by email; the site streams only.</p>
+        </div>
+    </div>
+
+    <p style="margin-top: 2rem; font-style: italic; opacity: 0.7;">A single master stands in for all two hundred seventy-two: held privately, indexed publicly, and streamed only when a member asks to hear it.</p>
+
+    <div class="image-container">
+        <img src="reel-to-reel.jpg" alt="Reel to reel tape and vinyl record">
+    </div>
+</section>
+
+<!-- Chapter 5 -->
+<section class="chapter">
+    <div class="chapter-header">
+        <span class="chapter-number">Chapter 5</span>
+        <h2 class="chapter-title">Milestones</h2>
+    </div>
+
+    <h3 class="section-title">Four Marks on the Scroll</h3>
+    <p class="section-text">A catalog this size is not built in one motion. Four milestones mark the way from scattered record to stream-ready archive — each one a completed phase of the work.</p>
+
+    <div class="milestones">
+        <div class="milestone">
+            <div class="milestone-number">1.</div>
+            <div class="milestone-phase">Phase One · 2020 · Year One</div>
+            <h4 class="milestone-title">The Source Record Surfaces</h4>
+            <p class="milestone-text">The earliest masters are gathered in one place for the first time. The record exists — but it is scattered, unindexed, and offline.</p>
+        </div>
+
+        <div class="milestone">
+            <div class="milestone-number">2.</div>
+            <div class="milestone-phase">Phase Two · The Middle Years · Reconstruction</div>
+            <h4 class="milestone-title">Forty-One Releases, Rebuilt</h4>
+            <p class="milestone-text">Release by release, the catalog is reconstructed until the record stands complete: forty-one releases, every title and status preserved.</p>
+        </div>
+
+        <div class="milestone">
+            <div class="milestone-number">3.</div>
+            <div class="milestone-phase">Phase Three · Indexing · 272 Tracks</div>
+            <h4 class="milestone-title">Every Track Finds Its Place</h4>
+            <p class="milestone-text">The index deepens from releases to tracks: two hundred seventy-two entries, each one searchable, sortable, and ready to stream.</p>
+        </div>
+
+        <div class="milestone">
+            <div class="milestone-number">4.</div>
+            <div class="milestone-phase">Phase Four · Present · Stream-Ready</div>
+            <h4 class="milestone-title">The Vault Opens, One Track at a Time</h4>
+            <p class="milestone-text">The archive goes live with its delivery protocol: masters private, streams metered, browsing instant. The catalog is now a membership experience.</p>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="waveform-landscape-2.jpg" alt="Waveform landscape visualization">
+    </div>
+
+    <div class="image-container">
+        <img src="reel-to-reel-2.jpg" alt="Reel to reel tape and vinyl record">
+        <div class="seal"> seal</div>
+    </div>
+</section>
+
+</body>
+</html>
