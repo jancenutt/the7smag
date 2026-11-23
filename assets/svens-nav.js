@@ -1,5 +1,9 @@
-// The Svens — story navigation arrows + live date guard.
+// The Svens — story navigation arrows + dead-link fixer.
 // Added to the Muze copy, 2026-11-21. The live Kimi site is untouched.
+//
+// ROUTING: this site uses hash routing (React Router HashRouter). Routes
+// live in location.hash: "#/issue", "#/article/<slug>", "#/" = front page.
+// Navigation sets location.hash — never pushState to a bare path.
 //
 // STORY NUMBERING: stories are numbered 01, 02, 03... in the order they
 // were posted, up to 100+. When a new story is posted, add its article
@@ -15,6 +19,18 @@
     "/article/two-intelligences-one-love-story",  // 04
     "/article/the-archive-speaks"                 // 05
   ];
+
+  var SHOP_URL = "https://jancenutt.com";
+  var ARCHIVE_URL = "https://analuci.app";
+
+  // --- Current route from the hash ---
+  function currentPath() {
+    var h = window.location.hash || "";
+    if (h === "" || h === "#/" || h === "#") return "/";
+    if (h.charAt(0) === "#") h = h.slice(1);
+    if (h.charAt(0) !== "/") h = "/" + h; // "#issue" -> "/issue"
+    return h.split("?")[0].split("#")[0];
+  }
 
   // --- Styles: black caret arrows, newspaper-reader style ---
   var css = [
@@ -62,23 +78,17 @@
   var prevBtn = makeButton("svens-nav-prev", "Previous story", "\u2039");
   var nextBtn = makeButton("svens-nav-next", "Next story", "\u203a");
 
-  // --- Navigation: SPA-style, no page reload (direct article URLs 404) ---
+  // --- Navigation: change the hash, the router follows (no reload) ---
   function go(path) {
-    if (!path || path === window.location.pathname) return;
-    window.history.pushState({}, "", path);
-    window.dispatchEvent(new PopStateEvent("popstate"));
-    window.scrollTo(0, 0);
-    update();
-  }
-
-  function currentIndex() {
-    return STORIES.indexOf(window.location.pathname);
+    if (!path || path === currentPath()) return;
+    window.location.hash = "#" + path;
+    setTimeout(function () { window.scrollTo(0, 0); }, 60);
   }
 
   function update() {
-    var path = window.location.pathname;
-    var idx = currentIndex();
-    var onIssue = path === "/issue" || path === "/issue/";
+    var path = currentPath();
+    var idx = STORIES.indexOf(path);
+    var onIssue = path === "/issue";
     var onArticle = idx !== -1;
     if (!onIssue && !onArticle) {
       prevBtn.classList.add("svens-nav-hidden");
@@ -96,20 +106,54 @@
     nextBtn.onclick = nextTarget ? function () { go(nextTarget); } : null;
   }
 
-  // --- Keep the arrows in sync with the router ---
-  var _pushState = history.pushState;
-  var _replaceState = history.replaceState;
-  history.pushState = function () {
-    var r = _pushState.apply(this, arguments);
+  // --- Dead-link fixer: "Shop the drop ↗" and "Press play ↗" are plain
+  // text in the articles, not links. Wrap them in real links. ---
+  var LINK_TEXTS = [
+    { text: "Shop the drop \u2197", href: SHOP_URL },
+    { text: "Press play \u2197", href: ARCHIVE_URL }
+  ];
+
+  function linkify() {
+    var walker = document.createTreeWalker(
+      document.body, NodeFilter.SHOW_TEXT, null, false
+    );
+    var nodes = [];
+    var n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (node) {
+      var parent = node.parentNode;
+      if (!parent) return;
+      // Never touch the nav buttons, scripts, styles, or existing links.
+      if (parent.closest(".svens-nav-btn, script, style, a")) return;
+      var value = node.nodeValue;
+      for (var i = 0; i < LINK_TEXTS.length; i++) {
+        var item = LINK_TEXTS[i];
+        var at = value.indexOf(item.text);
+        if (at === -1) continue;
+        var before = document.createTextNode(value.slice(0, at));
+        var link = document.createElement("a");
+        link.href = item.href;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = item.text;
+        var after = document.createTextNode(value.slice(at + item.text.length));
+        parent.insertBefore(before, node);
+        parent.insertBefore(link, node);
+        parent.insertBefore(after, node);
+        parent.removeChild(node);
+        break; // one link per text node is enough; re-run catches the rest
+      }
+    });
+  }
+
+  function refresh() {
     update();
-    return r;
-  };
-  history.replaceState = function () {
-    var r = _replaceState.apply(this, arguments);
-    update();
-    return r;
-  };
-  window.addEventListener("popstate", update);
+    setTimeout(linkify, 150); // let the router render first
+  }
+
+  // --- Keep everything in sync with the router ---
+  window.addEventListener("hashchange", refresh);
+  window.addEventListener("popstate", refresh);
   document.addEventListener("keydown", function (e) {
     if (e.key === "ArrowLeft" && !prevBtn.classList.contains("svens-nav-hidden")) {
       prevBtn.click();
@@ -118,5 +162,5 @@
     }
   });
 
-  update();
+  refresh();
 })();
