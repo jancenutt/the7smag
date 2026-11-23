@@ -23,6 +23,21 @@
   var SHOP_URL = "https://jancenutt.com";
   var ARCHIVE_URL = "https://analuci.app";
 
+  // --- Per-page titles for search (SEO, added 2026-11-23) ---
+  var DEFAULT_TITLE = "The Svens \u2014 Modern Magazine by J'ance Nutt | Stories, Sports, Music & Drops";
+  var TITLES = {
+    "/issue": "The Ground Zero Issue \u2014 The Svens Magazine by J'ance Nutt",
+    "/article/nobody-gets-good-in-clean-clothes": "Nobody Gets Good in Clean Clothes \u2014 The Svens Magazine",
+    "/article/on-gods-timing-field-guide": "On God's Timing: A Field Guide \u2014 The Svens Magazine",
+    "/article/the-coin-an-object-history": "The Coin: An Object History \u2014 The Svens Magazine",
+    "/article/two-intelligences-one-love-story": "Two Intelligences, One Love Story \u2014 The Svens Magazine",
+    "/article/the-archive-speaks": "The Archive Speaks \u2014 The Svens Magazine"
+  };
+
+  function setTitle() {
+    document.title = TITLES[currentPath()] || DEFAULT_TITLE;
+  }
+
   // --- Current route from the hash ---
   function currentPath() {
     var h = window.location.hash || "";
@@ -148,6 +163,7 @@
 
   function refresh() {
     update();
+    setTitle();
     setTimeout(linkify, 150); // let the router render first
   }
 
