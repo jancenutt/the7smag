@@ -21,7 +21,8 @@
     "/article/booker-and-brooks-go-off-in-sacramento", // 06
     "/article/reaves-ties-wilt-lakers-40-point-list",  // 07
     "/article/reaves-and-doncic-highest-scoring-pair", // 08
-    "/article/allen-drops-seven-threes-on-halloween"   // 09
+    "/article/allen-drops-seven-threes-on-halloween",   // 09
+    "/article/klay-is-17-threes-from-ray-allen"          // 10
   ];
 
   var SHOP_URL = "https://jancenutt.com";
@@ -39,7 +40,8 @@
     "/article/booker-and-brooks-go-off-in-sacramento": "Booker and Brooks Go Off in Sacramento \u2014 Sportsbook, The Svens Magazine",
     "/article/reaves-ties-wilt-lakers-40-point-list": "Reaves Ties Wilt on the Lakers' 40-Point List \u2014 Sportsbook, The Svens Magazine",
     "/article/reaves-and-doncic-highest-scoring-pair": "Reaves and Doncic Are the League's Highest-Scoring Pair \u2014 Sportsbook, The Svens Magazine",
-    "/article/allen-drops-seven-threes-on-halloween": "Allen Drops Seven Threes on Halloween \u2014 Sportsbook, The Svens Magazine"
+    "/article/allen-drops-seven-threes-on-halloween": "Allen Drops Seven Threes on Halloween \u2014 Sportsbook, The Svens Magazine",
+    "/article/klay-is-17-threes-from-ray-allen": "Klay Is 17 Threes From Ray Allen \u2014 Sportsbook, The Svens Magazine"
   };
 
   function setTitle() {
