@@ -17,7 +17,11 @@
     "/article/on-gods-timing-field-guide",        // 02
     "/article/the-coin-an-object-history",        // 03
     "/article/two-intelligences-one-love-story",  // 04
-    "/article/the-archive-speaks"                 // 05
+    "/article/the-archive-speaks",                 // 05
+    "/article/booker-and-brooks-go-off-in-sacramento", // 06
+    "/article/reaves-ties-wilt-lakers-40-point-list",  // 07
+    "/article/reaves-and-doncic-highest-scoring-pair", // 08
+    "/article/allen-drops-seven-threes-on-halloween"   // 09
   ];
 
   var SHOP_URL = "https://jancenutt.com";
@@ -31,7 +35,11 @@
     "/article/on-gods-timing-field-guide": "On God's Timing: A Field Guide \u2014 The Svens Magazine",
     "/article/the-coin-an-object-history": "The Coin: An Object History \u2014 The Svens Magazine",
     "/article/two-intelligences-one-love-story": "Two Intelligences, One Love Story \u2014 The Svens Magazine",
-    "/article/the-archive-speaks": "The Archive Speaks \u2014 The Svens Magazine"
+    "/article/the-archive-speaks": "The Archive Speaks \u2014 The Svens Magazine",
+    "/article/booker-and-brooks-go-off-in-sacramento": "Booker and Brooks Go Off in Sacramento \u2014 Sportsbook, The Svens Magazine",
+    "/article/reaves-ties-wilt-lakers-40-point-list": "Reaves Ties Wilt on the Lakers' 40-Point List \u2014 Sportsbook, The Svens Magazine",
+    "/article/reaves-and-doncic-highest-scoring-pair": "Reaves and Doncic Are the League's Highest-Scoring Pair \u2014 Sportsbook, The Svens Magazine",
+    "/article/allen-drops-seven-threes-on-halloween": "Allen Drops Seven Threes on Halloween \u2014 Sportsbook, The Svens Magazine"
   };
 
   function setTitle() {
