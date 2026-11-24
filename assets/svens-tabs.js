@@ -1,9 +1,12 @@
 // The Svens — page tabs under the masthead.
 // Added 2026-11-24 at J'ance's direction: little tabs all the way across
 // under "The Svens" on the main page, one tab per portfolio page, in his
-// order: Sportsbook, J'ance Nutt, Suki Shinoda, Ana.Luci, JJ&CO TRUST BRAND.
-// Lives outside the React bundle (same pattern as svens-nav.js): finds the
-// masthead heading, then inserts the tab bar right under its header block.
+// order, ALL CAPS: SPORTSBOOK, J'ANCE NUTT, SUKI SHINODA, ANA.LUCI,
+// JJ&CO TRUST BRAND. One line across on mobile too — no stacking.
+// Lives outside the React bundle (same pattern as svens-nav.js).
+// Placement fix (2026-11-24): the masthead is the LARGEST "The Svens"
+// heading near the TOP of the page — a footer/colophon "The Svens" must
+// never win, or the bar lands at the bottom.
 (function () {
   "use strict";
 
@@ -17,24 +20,23 @@
 
   var css = [
     ".svens-tabs{",
-    "  display:flex; flex-wrap:nowrap; width:100%;",
+    "  display:flex; flex-wrap:nowrap; width:100%; box-sizing:border-box;",
     "  border-top:3px double #111; border-bottom:1.5px solid #111;",
     "  background:#fbfaf7; margin:0; padding:0;",
     "  font-family:'Libre Franklin', Arial, sans-serif;",
     "  position:relative; z-index:60;",
     "}",
     ".svens-tabs a{",
-    "  flex:1 1 0; text-align:center; padding:10px 4px;",
+    "  flex:1 1 0; min-width:0; text-align:center; padding:10px 2px;",
     "  color:#111; text-decoration:none;",
     "  font-size:13px; font-weight:600;",
-    "  letter-spacing:.12em; text-transform:uppercase;",
+    "  letter-spacing:.1em; text-transform:uppercase;",
     "  border-right:1px solid #ccc; white-space:nowrap;",
-    "  overflow:hidden; text-overflow:ellipsis;",
     "}",
     ".svens-tabs a:last-child{ border-right:none; }",
     ".svens-tabs a:hover{ background:#111; color:#fff; }",
     "@media (max-width:640px){",
-    "  .svens-tabs a{ font-size:10px; letter-spacing:.05em; padding:8px 2px; }",
+    "  .svens-tabs a{ font-size:clamp(7px, 2vw, 10px); letter-spacing:0; padding:8px 0; }",
     "}"
   ].join("\n");
 
@@ -52,16 +54,18 @@
   }
 
   function findMastheadBlock() {
-    // The masthead is the big "The Svens" heading. Walk up to the block
-    // that wraps it (header or a full-width div) and put the bar after it.
-    var nodes = document.querySelectorAll("h1, h2, header div, a");
-    var best = null;
+    var nodes = document.querySelectorAll("h1, h2, h3, header *, a, div, span");
+    var best = null, bestScore = -1;
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
-      if (el.textContent && el.textContent.trim() === "The Svens") {
-        best = el;
-        break;
-      }
+      if (!el.textContent || el.textContent.trim() !== "The Svens") continue;
+      if (el.children.length > 0) continue; // the heading itself, not a wrapper
+      var rect = el.getBoundingClientRect();
+      var top = rect.top + window.scrollY;
+      if (top > 900) continue; // footer/colophon copies sit far down the page
+      var size = parseFloat(window.getComputedStyle(el).fontSize) || 0;
+      var score = size * 1000 - top;
+      if (score > bestScore) { bestScore = score; best = el; }
     }
     if (!best) return null;
     var block = best;
@@ -90,17 +94,13 @@
     return true;
   }
 
-  // React renders after load; retry for a few seconds, then watch for
-  // route changes (hash routing re-renders the header).
   var tries = 0;
   var timer = setInterval(function () {
     tries++;
     if (inject() || tries > 40) clearInterval(timer);
   }, 250);
 
-  var observer = new MutationObserver(function () {
-    inject();
-  });
+  var observer = new MutationObserver(function () { inject(); });
   window.addEventListener("hashchange", function () {
     setTimeout(inject, 300);
   });
