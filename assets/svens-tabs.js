@@ -8,10 +8,10 @@
   "use strict";
 
   var TABS = [
-    { label: "Sportsbook", href: "/sportsbook/" },
-    { label: "J'ance Nutt", href: "/jancenutt/" },
-    { label: "Suki Shinoda", href: "/suki/" },
-    { label: "Ana.Luci", href: "/analuci/" },
+    { label: "SPORTSBOOK", href: "/sportsbook/" },
+    { label: "J'ANCE NUTT", href: "/jancenutt/" },
+    { label: "SUKI SHINODA", href: "/suki/" },
+    { label: "ANA.LUCI", href: "/analuci/" },
     { label: "JJ&CO TRUST BRAND", href: "/jjncotrustbrand/" }
   ];
 
