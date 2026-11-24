@@ -33,6 +33,12 @@
   footer{ margin-top:48px; border-top:3px double var(--rule); padding-top:14px; font-family:"Libre Franklin", sans-serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-align:center; }
   footer a{ color:var(--ink); text-decoration:none; margin:0 8px; }
   @media (max-width:640px){ h1.masthead{ font-size:44px; } h2{ font-size:27px; } p{ font-size:17px; } }
+
+  .page-arrow{ position:fixed; top:50%; transform:translateY(-50%); z-index:50; width:52px; height:84px; background:#111; color:#fff; border:none; font-size:44px; line-height:1; cursor:pointer; font-family:Georgia, serif; display:flex; align-items:center; justify-content:center; text-decoration:none; }
+  .page-arrow:hover{ background:#000; }
+  .page-arrow.prev{ left:0; border-radius:0 8px 8px 0; }
+  .page-arrow.next{ right:0; border-radius:8px 0 0 8px; }
+  @media (max-width:640px){ .page-arrow{ width:40px; height:64px; font-size:34px; } }
 </style>
 </head>
 <body>
@@ -41,10 +47,10 @@
     <h1 class="masthead">AnaLuci</h1>
     <nav class="sub">
       <a href="https://the7smag.com/">The Magazine</a>
-      <a href="https://jancenutt.the7smag.com/">J'ance Nutt</a>
-      <a href="https://jjncotrustbrand.the7smag.com/">JJ&amp;CO</a>
-      <a href="https://suki.the7smag.com/">Suki</a>
-      <a href="https://sportsbook.the7smag.com/">Sportsbook</a>
+      <a href="../jancenutt/">J'ance Nutt</a>
+      <a href="../jjncotrustbrand/">JJ&amp;CO</a>
+      <a href="../suki/">Suki</a>
+      <a href="../sportsbook/">Sportsbook</a>
     </nav>
 
     <h2>Everything that links to the archive, in one place.</h2>
@@ -74,5 +80,13 @@
       <a href="https://jancenutt.com">jancenutt.com</a>
     </footer>
   </div>
+
+  <a class="page-arrow next" href="../jancenutt/" aria-label="Next page: J'ance Nutt">&#8250;</a>
+  <script>
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowLeft' && "") location.href = "";
+  if (e.key === 'ArrowRight' && "../jancenutt/") location.href = "../jancenutt/";
+});
+</script>
 </body>
 </html>
