@@ -10,4 +10,29 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://the7smag.com/analuci/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://the7smag.com/jancenutt/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://the7smag.com/jjncotrustbrand/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://the7smag.com/suki/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://the7smag.com/sportsbook/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
