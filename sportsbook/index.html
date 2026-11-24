@@ -34,6 +34,17 @@
   footer a{ color:var(--ink); text-decoration:none; margin:0 8px; }
   @media (max-width:640px){ h1.masthead{ font-size:44px; } h2{ font-size:27px; } p{ font-size:17px; } }
 
+
+  .post{ border-top:1px solid #999; padding:18px 0 6px; scroll-margin-top:24px; }
+  .post .folio{ font-family:"Libre Franklin", sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+  .post h4{ font-family:"Playfair Display", serif; font-size:24px; margin:6px 0 4px; }
+  .post p{ margin:4px 0 10px; }
+  .post a{ color:var(--ink); }
+  .story-arrow{ position:fixed; top:50%; margin-top:-28px; z-index:9999; width:56px; height:56px; display:flex; align-items:center; justify-content:center; background:#fff; color:#000; border:1.5px solid #000; border-radius:50%; font-family:Georgia, serif; font-size:34px; font-weight:700; line-height:1; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25); text-decoration:none; padding-bottom:4px; box-sizing:border-box; }
+  .story-arrow:hover{ background:#f2f2f2; }
+  .story-arrow.prev{ left:10px; }
+  .story-arrow.next{ right:10px; }
+  .story-arrow.off{ display:none; }
 </style>
 </head>
 <body>
@@ -64,7 +75,31 @@
 
     <section class="posts">
       <h3>Posts</h3>
-      <p class="empty">Posts are added here after the pages are made — J'ance's order, 2026-11-24.</p>
+            <article class="post" id="post-1">
+        <div class="folio">Story 06 &middot; Sportsbook</div>
+        <h4>Booker and Brooks Go Off in Sacramento</h4>
+        <p><a href="https://the7smag.com/#/article/booker-and-brooks-go-off-in-sacramento">Read it in the magazine &#8599;</a></p>
+      </article>
+      <article class="post" id="post-2">
+        <div class="folio">Story 07 &middot; Sportsbook</div>
+        <h4>Reaves Ties Wilt on the Lakers' 40-Point List</h4>
+        <p><a href="https://the7smag.com/#/article/reaves-ties-wilt-lakers-40-point-list">Read it in the magazine &#8599;</a></p>
+      </article>
+      <article class="post" id="post-3">
+        <div class="folio">Story 08 &middot; Sportsbook</div>
+        <h4>Reaves and Doncic Are the League's Highest-Scoring Pair</h4>
+        <p><a href="https://the7smag.com/#/article/reaves-and-doncic-highest-scoring-pair">Read it in the magazine &#8599;</a></p>
+      </article>
+      <article class="post" id="post-4">
+        <div class="folio">Story 09 &middot; Sportsbook</div>
+        <h4>Allen Drops Seven Threes on Halloween</h4>
+        <p><a href="https://the7smag.com/#/article/allen-drops-seven-threes-on-halloween">Read it in the magazine &#8599;</a></p>
+      </article>
+      <article class="post" id="post-5">
+        <div class="folio">Story 10 &middot; Sportsbook</div>
+        <h4>Klay Is 17 Threes From Ray Allen</h4>
+        <p><a href="https://the7smag.com/#/article/klay-is-17-threes-from-ray-allen">Read it in the magazine &#8599;</a></p>
+      </article>
       <!-- POSTS: added after all five pages are made. Each post here must link to analuci.app (website / archive / music). Sportsbook posts are excluded. -->
     </section>
 
@@ -77,5 +112,29 @@
   </div>
 
   
+
+  <a class="story-arrow prev off" id="storyPrev" href="#post-1" aria-label="Previous story">&#8249;</a>
+  <a class="story-arrow next" id="storyNext" href="#post-2" aria-label="Next story">&#8250;</a>
+  <script>
+  (function(){
+    var TOTAL = 5;
+    function current(){
+      var m = (location.hash || "").match(/post-(\d+)/);
+      var n = m ? parseInt(m[1], 10) : 1;
+      return Math.min(Math.max(n, 1), TOTAL);
+    }
+    function sync(){
+      var n = current();
+      var prev = document.getElementById('storyPrev');
+      var next = document.getElementById('storyNext');
+      prev.href = '#post-' + (n - 1);
+      next.href = '#post-' + (n + 1);
+      prev.classList.toggle('off', n <= 1);
+      next.classList.toggle('off', n >= TOTAL);
+    }
+    window.addEventListener('hashchange', sync);
+    sync();
+  })();
+  </script>
 </body>
 </html>

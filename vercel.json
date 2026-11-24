@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/analuci/", "has": [{ "type": "host", "value": "analuci.the7smag.com" }] },
+    { "source": "/", "destination": "/jancenutt/", "has": [{ "type": "host", "value": "jancenutt.the7smag.com" }] },
+    { "source": "/", "destination": "/jjncotrustbrand/", "has": [{ "type": "host", "value": "jjncotrustbrand.the7smag.com" }] },
+    { "source": "/", "destination": "/suki/", "has": [{ "type": "host", "value": "suki.the7smag.com" }] },
+    { "source": "/", "destination": "/sportsbook/", "has": [{ "type": "host", "value": "sportsbook.the7smag.com" }] }
+  ]
+}
