@@ -34,11 +34,6 @@
   footer a{ color:var(--ink); text-decoration:none; margin:0 8px; }
   @media (max-width:640px){ h1.masthead{ font-size:44px; } h2{ font-size:27px; } p{ font-size:17px; } }
 
-  .page-arrow{ position:fixed; top:50%; transform:translateY(-50%); z-index:50; width:52px; height:84px; background:#111; color:#fff; border:none; font-size:44px; line-height:1; cursor:pointer; font-family:Georgia, serif; display:flex; align-items:center; justify-content:center; text-decoration:none; }
-  .page-arrow:hover{ background:#000; }
-  .page-arrow.prev{ left:0; border-radius:0 8px 8px 0; }
-  .page-arrow.next{ right:0; border-radius:8px 0 0 8px; }
-  @media (max-width:640px){ .page-arrow{ width:40px; height:64px; font-size:34px; } }
 </style>
 </head>
 <body>
@@ -81,7 +76,6 @@
     </footer>
   </div>
 
-  <a class="page-arrow next" href="../jancenutt/" aria-label="Next page: J'ance Nutt">&#8250;</a>
   <script>
 document.addEventListener('keydown', function(e){
   if (e.key === 'ArrowLeft' && "") location.href = "";
