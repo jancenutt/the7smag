@@ -1,0 +1,46 @@
+/* The Svens - masthead top-menu mobile fix.
+   Added 2026-11-25 (Muze). Lives outside the React bundle, same pattern
+   as svens-nav.js / svens-tabs.js.
+
+   Problem: on phones the sticky top menu (Front Page ... Colophon) was
+   a single no-wrap, horizontally scrolling row next to the "The Svens"
+   brand, with the scrollbar hidden and a fade-out mask on its right
+   edge (mask-image: linear-gradient(to right, black 82%, transparent)).
+   The full row is far wider than a phone screen, so the last item,
+   "Colophon", sat off the right edge / half faded - it looked cut off.
+
+   Fix (small screens only, desktop untouched): let the bar wrap, let
+   the menu take its own full-width row(s) under the brand, wrap the
+   items onto as many rows as they need, remove the fade mask and the
+   horizontal scrolling, and tighten the item spacing. Every menu item
+   stays fully visible; no label ever breaks mid-word. */
+@media (max-width: 767px) {
+  /* The sticky bar's inner row: fixed h-11 becomes auto height + wrap,
+     so the brand and the menu are no longer squeezed onto one line. */
+  #top > div:first-child > div {
+    height: auto;
+    min-height: 2.75rem;
+    flex-wrap: wrap;
+    row-gap: 0;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+  /* The sections menu itself: full-width row(s), wrapping, no fade. */
+  #top nav[aria-label="Sections"] {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-x: visible;
+    overflow-y: visible;
+    gap: 0.15rem 1rem;
+    justify-content: center;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  /* Each label stays whole and takes less vertical room than py-3. */
+  #top nav[aria-label="Sections"] a {
+    white-space: nowrap;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+}
